@@ -21,13 +21,13 @@ pipeline {
 
         stage('Build & Unit Tests') {
             steps {
-                sh 'mvn clean test -DbaseUrl=$BASE_URL'
+                bat 'mvn clean test -DbaseUrl=$BASE_URL'
             }
         }
 
         stage('Performance Tests') {
             steps {
-                sh 'mvn gatling:test -DbaseUrl=$BASE_URL'
+                bat 'mvn gatling:test -DbaseUrl=$BASE_URL'
             }
         }
 
@@ -45,8 +45,8 @@ pipeline {
 
     post {
         always {
-            junit 'target/surefire-reports/*.xml'
-        }
+            junit 'target/surefire-reports/*.xml' // publish JUnit reports (unit tests)
+            echo 'Pipeline finished. Check Gatling report under target/gatling.'        }
         failure {
             echo "Build failed! Check Gatling report and logs."
         }
