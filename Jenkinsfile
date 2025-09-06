@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-//     tools {
-//         maven 'Maven3'   // Make sure Maven is configured in Jenkins Global Tools
-//         jdk 'JDK17'      // Use the JDK name you configured in Jenkins
-//     }
-
     stages {
         stage('Checkout') {
             steps {
@@ -22,13 +17,18 @@ pipeline {
 
         stage('Performance Tests') {
             steps {
-                bat 'mvn gatling:test'
+                bat 'mvn gatling:test "-Dgatling.simulationClass=conduitApp.performance.mockUsersSimulation"'
             }
         }
 
         stage('Archive Reports') {
             steps {
                 archiveArtifacts artifacts: 'target/gatling/**', fingerprint: true
+                publishHTML(target: [
+                    reportDir: 'target/gatling',
+                    reportFiles: 'index.html',
+                    reportName: 'Gatling Report'
+                ])
             }
         }
     }
