@@ -1,10 +1,10 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'M3'    // Ensure Maven is configured in Jenkins (Global Tool Config)
-        jdk 'JDK11'   // Ensure JDK 11 (or higher) is configured in Jenkins
-    }
+//     tools {
+//         maven 'M3'    // Ensure Maven is configured in Jenkins (Global Tool Config)
+//         jdk 'JDK11'   // Ensure JDK 11 (or higher) is configured in Jenkins
+//     }
 
     environment {
         // You can pass baseUrl dynamically (e.g., QA / Staging)
