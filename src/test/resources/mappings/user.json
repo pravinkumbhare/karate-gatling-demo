@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/user"
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "transformers": ["response-template"],
+    "body": "{ \"status\": \"User created successfully\", \"userId\": {{randomValue type='NUMERIC' length=3}}, \"name\": \"{{jsonPath request.body '$.name'}}\", \"role\": \"{{jsonPath request.body '$.role'}}\" }"
+  }
+}

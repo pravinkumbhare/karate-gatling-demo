@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "DELETE",
+    "urlPattern": "/user/.*"
+  },
+  "response": {
+    "status": 200,
+    "transformers": ["response-template"],
+    "headers": { "Content-Type": "application/json" },
+    "body": "{ \"status\": \"User deleted successfully\", \"userId\": \"{{request.pathSegments.[1]}}\" }"
+  }
+}

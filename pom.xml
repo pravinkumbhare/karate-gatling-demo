@@ -1,0 +1,142 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mycompany</groupId>
+  <artifactId>karate-gatling-demo</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <maven.compiler.version>3.8.1</maven.compiler.version>
+    <maven.surefire.version>2.22.2</maven.surefire.version>
+    <karate.version>1.4.0</karate.version>
+    <gatling.plugin.version>4.3.7</gatling.plugin.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.intuit.karate</groupId>
+      <artifactId>karate-junit5</artifactId>
+      <version>${karate.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.intuit.karate</groupId>
+      <artifactId>karate-gatling</artifactId>
+      <version>${karate.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>1.0.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.tomakehurst</groupId>
+      <artifactId>wiremock-jre8</artifactId>
+      <version>2.35.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!--    <dependency>-->
+<!--      <groupId>com.intuit.karate</groupId>-->
+<!--      <artifactId>karate-netty</artifactId>-->
+<!--      <version>0.8.0.RC7</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+
+<!--    <dependency>-->
+<!--      <groupId>com.intuit.karate</groupId>-->
+<!--      <artifactId>karate-mock-http</artifactId>-->
+<!--      <version>1.4.0</version> &lt;!&ndash; same as your Karate version &ndash;&gt;-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+
+
+  </dependencies>
+
+  <build>
+    <testResources>
+      <testResource>
+        <directory>src/test/java</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </testResource>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+    </testResources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.version}</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>io.gatling</groupId>
+        <artifactId>gatling-maven-plugin</artifactId>
+        <version>${gatling.plugin.version}</version>
+        <configuration>
+          <simulationsFolder>src/test/java/conduitApp/performance</simulationsFolder>
+          <configFolder>src/test/resources</configFolder>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>4.5.6</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <mainClass>mock.MockServerRunner</mainClass>
+          <classpathScope>test</classpathScope>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>io.gatling</groupId>
+        <artifactId>gatling-maven-plugin</artifactId>
+        <version>4.5.0</version>
+        <configuration>
+          <failOnError>true</failOnError>
+          <simulationsFolder>src/test/java/conduitApp/performance</simulationsFolder>
+          <resultsFolder>target/gatling</resultsFolder>
+        </configuration>
+      </plugin>
+
+
+    </plugins>
+  </build>
+</project>
