@@ -17,7 +17,14 @@ pipeline {
 
         stage('Performance Tests') {
             steps {
-                bat 'mvn gatling:test "-Dgatling.simulationClass=conduitApp.performance.mockUsersSimulation"'
+
+                 script {
+                            try {
+                                bat 'mvn gatling:test "-Dgatling.simulationClass=conduitApp.performance.mockUsersSimulation"'
+                            } catch (Exception e) {
+                                error("❌ Performance SLA not met! Check Gatling report.")
+                            }
+                        }
             }
         }
 
