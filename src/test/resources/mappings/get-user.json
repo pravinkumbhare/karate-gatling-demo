@@ -1,14 +1,14 @@
 {
   "request": {
     "method": "GET",
-    "urlPattern": "/user/.*"
+    "urlPattern": "/user/[0-9]+"
   },
   "response": {
     "status": 200,
-    "transformers": ["response-template"],
     "headers": {
       "Content-Type": "application/json"
     },
+    "transformers": ["response-template"],
     "body": "{ \"userId\": {{request.path.[1]}}, \"name\": \"Pravin Updated\", \"role\": \"super-admin\" }"
   }
 }

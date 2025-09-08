@@ -21,19 +21,18 @@ Feature: Mock Users API with WireMock - Full CRUD Flow
     Then status 201
     * print 'Create Response:', response
     * def createdUserId = response.userId
-    And match response contains { status: '#string', name: '#string', role: '#string' }
+    And match response contains { status: '#string', userId: '#number', name: '#string', role: '#string' }
     And match response.userId == '#number'
 
 
   ##################################################
   # UPDATE the user
   ##################################################
-#    * def updatedName = name + '-Updated'
     Given path 'user', createdUserId
     And request
   """
   {
-    name: '#(updatedName)',
+    name: '#(name)',
     role: 'super-admin'
   }
   """
@@ -41,7 +40,7 @@ Feature: Mock Users API with WireMock - Full CRUD Flow
     Then status 200
     * print 'Update Response:', response
     And match response contains { status: '#string', name: '#string', role: '#string' }
-    And match response.userId == '#string'
+    And match response.userId == '#number'
 
 
   ##################################################
@@ -62,7 +61,7 @@ Feature: Mock Users API with WireMock - Full CRUD Flow
     Then status 200
     * print 'Delete Response:', response
     And match response contains { status: '#string' }
-    And match response.userId == '#string'
+    And match response.userId == '#number'
 
 
   ##################################################

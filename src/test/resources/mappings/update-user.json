@@ -1,12 +1,14 @@
 {
   "request": {
     "method": "PUT",
-    "urlPattern": "/user/.*"
+    "urlPattern": "/user/[0-9]+"
   },
   "response": {
     "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
     "transformers": ["response-template"],
-    "headers": { "Content-Type": "application/json" },
-    "body": "{ \"status\": \"User updated successfully\", \"userId\": \"{{request.pathSegments.[1]}}\", \"name\": \"{{jsonPath request.body '$.name'}}\", \"role\": \"{{jsonPath request.body '$.role'}}\" }"
+    "body": "{ \"status\": \"User updated successfully\", \"userId\": {{request.path.[1]}}, \"name\": \"{{jsonPath request.body '$.name'}}\", \"role\": \"{{jsonPath request.body '$.role'}}\" }"
   }
 }
