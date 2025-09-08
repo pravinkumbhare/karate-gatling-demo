@@ -23,12 +23,14 @@ pipeline {
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: 'target/gatling/**', fingerprint: true
-                publishHTML(target: [
-                    reportDir: 'target/gatling',
-                    reportFiles: 'index.html',
-                    reportName: 'Gatling Report'
-                ])
+                gatlingArchive()
+
+//                 archiveArtifacts artifacts: 'target/gatling/**', fingerprint: true
+//                 publishHTML(target: [
+//                     reportDir: 'target/gatling',
+//                     reportFiles: 'index.html',
+//                     reportName: 'Gatling Report'
+//                 ])
             }
         }
     }
