@@ -40,7 +40,7 @@ Feature: Mock Users API with WireMock - Full CRUD Flow
     Then status 200
     * print 'Update Response:', response
     And match response contains { status: '#string', name: '#string', role: '#string' }
-    And match response.userId == '#number'
+    And match response.userId == '#string'
 
 
   ##################################################
@@ -61,7 +61,7 @@ Feature: Mock Users API with WireMock - Full CRUD Flow
     Then status 200
     * print 'Delete Response:', response
     And match response contains { status: '#string' }
-    And match response.userId == '#number'
+    And match response.userId == '#string'
 
 
   ##################################################
