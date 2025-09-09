@@ -27,11 +27,11 @@ class ReqResSimulation extends Simulation {
   // Inject users carefully
   setUp(
     getUserScenario.inject(
-      constantUsersPerSec(2) during (1.minute)  // GET requests, low load
+      constantUsersPerSec(2) during (5.second)  // GET requests, low load
     ).protocols(protocol),
 
     createUserScenario.inject(
-      constantUsersPerSec(1) during (1.minute)  // POST requests, very low load
+      constantUsersPerSec(1) during (5.second)  // POST requests, very low load
     ).protocols(protocol)
   )
 

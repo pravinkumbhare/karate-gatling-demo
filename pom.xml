@@ -86,15 +86,7 @@
           <target>${java.version}</target>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>io.gatling</groupId>
-        <artifactId>gatling-maven-plugin</artifactId>
-        <version>${gatling.plugin.version}</version>
-        <configuration>
-          <simulationsFolder>src/test/java/conduitApp/performance</simulationsFolder>
-          <configFolder>src/test/resources</configFolder>
-        </configuration>
-      </plugin>
+
       <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
@@ -133,8 +125,11 @@
           <failOnError>true</failOnError>
           <simulationsFolder>src/test/java/conduitApp/performance</simulationsFolder>
           <resultsFolder>target/gatling</resultsFolder>
+          <configFolder>src/test/resources</configFolder>
+          <runMultipleSimulations>true</runMultipleSimulations>
         </configuration>
       </plugin>
+
 
 
     </plugins>
