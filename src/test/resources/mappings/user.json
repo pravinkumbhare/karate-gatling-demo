@@ -9,6 +9,6 @@
       "Content-Type": "application/json"
     },
     "transformers": ["response-template"],
-    "body": "{ \"status\": \"User created successfully\", \"userId\": {{randomValue type='int' min=100 max=999}}, \"name\": \"{{jsonPath request.body '$.name'}}\", \"role\": \"{{jsonPath request.body '$.role'}}\" }"
+    "body": "{ \"status\": \"User created successfully\", \"userId\": {{randomInt 100 999}}, \"name\": \"{{jsonPath request.body '$.name'}}\", \"role\": \"{{jsonPath request.body '$.role'}}\" }"
   }
 }

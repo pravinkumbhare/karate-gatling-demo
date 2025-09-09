@@ -11,8 +11,8 @@ public class MockServerRunner {
     public static void main(String[] args) {
         WireMockServer server = new WireMockServer(wireMockConfig()
                                                     .port(8081)
-                                                    .usingFilesUnderDirectory("src/test/resources")
-//                                                    .usingFilesUnderDirectory("target/test-classes")
+//                                                    .usingFilesUnderDirectory("src/test/resources")
+                                                    .usingFilesUnderDirectory("target/test-classes")
                                                     .extensions(new ResponseTemplateTransformer(true)) // <--- enable templating
         );
         server.start();

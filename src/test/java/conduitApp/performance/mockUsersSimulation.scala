@@ -109,7 +109,7 @@ class mockUsersSimulation extends Simulation{
   )
     .assertions(
       global.responseTime.percentile3.lt(3000),    // 95% requests < 3s
-      global.successfulRequests.percent.gt(95)     // > 95% success
+      global.successfulRequests.percent.gt(99)     // > 95% success
     )
 
 }

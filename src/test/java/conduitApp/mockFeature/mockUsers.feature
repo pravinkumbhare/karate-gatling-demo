@@ -2,7 +2,7 @@ Feature: Mock Users API with WireMock - Full CRUD Flow
 
   Background:
 #    * url 'http://localhost:8081/'
-  * url baseUrl
+    * url baseUrl
 
   Scenario: Full CRUD flow for a single user
 
@@ -11,16 +11,17 @@ Feature: Mock Users API with WireMock - Full CRUD Flow
   ##################################################
     Given path 'user'
     And request
-  """
-  {
-    name: '#(name)',
-    role: '#(role)'
-  }
-  """
+    """
+    {
+      name: '#(name)',
+      role: '#(role)'
+    }
+    """
     When method post
     Then status 201
     * print 'Create Response:', response
-    * def createdUserId = response.userId
+    # Force userId to always be positive
+    * def createdUserId = Math.abs(response.userId)
     And match response contains { status: '#string', userId: '#number', name: '#string', role: '#string' }
     And match response.userId == '#number'
 
@@ -30,17 +31,17 @@ Feature: Mock Users API with WireMock - Full CRUD Flow
   ##################################################
     Given path 'user', createdUserId
     And request
-  """
-  {
-    name: '#(name)',
-    role: 'super-admin'
-  }
-  """
+    """
+    {
+      name: '#(name)',
+      role: 'super-admin'
+    }
+    """
     When method put
     Then status 200
     * print 'Update Response:', response
     And match response contains { status: '#string', name: '#string', role: '#string' }
-    And match response.userId == '#string'
+    And match response.userId == '#number'
 
 
   ##################################################
@@ -61,7 +62,7 @@ Feature: Mock Users API with WireMock - Full CRUD Flow
     Then status 200
     * print 'Delete Response:', response
     And match response contains { status: '#string' }
-    And match response.userId == '#string'
+    And match response.userId == '#number'
 
 
   ##################################################

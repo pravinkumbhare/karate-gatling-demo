@@ -8,7 +8,6 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "transformers": ["response-template"],
-    "body": "{\n  \"users\": [\n    {\n      \"userId\": 1,\n      \"name\": \"Alice\",\n      \"role\": \"admin\"\n    },\n    {\n      \"userId\": {{request.path.[1]}},\n      \"name\": \"{{jsonPath request.body '$.name'}}\",\n      \"role\": \"{{jsonPath request.body '$.role'}}\"\n    }\n  ]\n}"
+    "body": "{\n  \"users\": [\n    {\n      \"userId\": 1,\n      \"name\": \"Alice\",\n      \"role\": \"admin\"\n    },\n    {\n      \"userId\": 2,\n      \"name\": \"Bob\",\n      \"role\": \"user\"\n    }\n  ]\n}"
   }
 }
